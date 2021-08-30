@@ -1,0 +1,8 @@
+{
+  "name": "Pizza-Delivery",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/RobiulMan/Pizza-Delivery.git",
+  "author": "RobiulMan <robiulislam.bg@gmail.com>",
+  "license": "MIT"
+}
