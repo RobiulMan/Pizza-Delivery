@@ -18,3 +18,16 @@ code {
 .navbar-brand {
   color: black !important;
 }
+
+h2{
+  font-size: 1.4em !important;
+}
+
+
+.crop {
+  width: 250px !important;
+  height: 250px !important;
+  overflow: hidden !important;
+  margin: 0 auto;
+}
+
