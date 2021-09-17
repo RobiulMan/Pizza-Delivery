@@ -16,7 +16,6 @@ const Pizza = ({ pizza }) => {
         <div className="row g-0">
           <div>
             <button style={{ border: "none", padding: 0 }} onClick={handleShow}>
-              {" "}
               <img
                 src={pizza.image}
                 className="img-fluid rounded-start"
@@ -47,7 +46,7 @@ const Pizza = ({ pizza }) => {
                     value={quentity}
                     onChange={(e) => setQuentity(e.target.value)}
                   >
-                    {[...Array(10).keys()].map((item, ind) => {
+                    {[...Array(10).keys()].map((item) => {
                       return <option value={item + 1}>{item + 1}</option>;
                     })}
                   </select>
@@ -56,14 +55,14 @@ const Pizza = ({ pizza }) => {
               <div className="d-flex  justify-content-between">
                 <div>
                   <button type="button" class="btn btn-dark">
-                    <span class="badge bg-dark">
+                    <span className="badge bg-dark">
                       Prices : $ {pizza.prices[0][varient] * quentity}
                     </span>
                   </button>
                 </div>
                 <div>
                   <button className="btn btn-primary">
-                    <i class="bi bi-bag-plus p-2"></i>
+                    <i className="bi bi-bag-plus p-2"></i>
                     Add Cart
                   </button>
                 </div>
@@ -76,7 +75,7 @@ const Pizza = ({ pizza }) => {
         <Modal.Header>
           <Modal.Title>{pizza.name}</Modal.Title>
           <button onClick={handleClose} style={{ border: "none" }}>
-            <i class="bi bi-x"></i>
+            <i className="bi bi-x"></i>
           </button>
         </Modal.Header>
         <Modal.Body>
