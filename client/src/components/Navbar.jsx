@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/Provider";
 const Navbar = () => {
+  const { cartItemState } = useContext(GlobalContext);
+
   return (
     <>
       <nav
@@ -7,7 +10,7 @@ const Navbar = () => {
         shadow-lg p-3 mb-5 rounded"
       >
         <div className="container-fluid ">
-          <a className="navbar-brand" href={1}>
+          <a className="navbar-brand" href='/'>
             Pizza-Delivery
           </a>
           <button
@@ -32,8 +35,13 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href={1}>
+                <a className="nav-link" href="/cart">
                   Cart
+                  <span className="badge bg-danger">
+                    {cartItemState.cartItems.length > 0
+                      ? cartItemState.cartItems.length
+                      : ""}
+                  </span>
                 </a>
               </li>
             </ul>

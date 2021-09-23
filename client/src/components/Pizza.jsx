@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
+import { addToCartAction } from "../context/actions/AddToCartAction";
+import { GlobalContext } from "../context/Provider";
 
 const Pizza = ({ pizza }) => {
   const [varient, setVarient] = useState("small");
-  const [quentity, setQuentity] = useState(1);
+  const [quentitys, setQuentity] = useState(1);
   // modal
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const { cartItemState, cartdispatch } = useContext(GlobalContext);
+
+  function addToCart() {
+    addToCartAction(pizza, quentitys, varient)(cartdispatch);
+  }
   return (
     <>
       <div className="card mb-3">
@@ -43,7 +50,7 @@ const Pizza = ({ pizza }) => {
                   <p>Quantity</p>
                   <select
                     className="form-control form-select form-select-sm"
-                    value={quentity}
+                    value={quentitys}
                     onChange={(e) => setQuentity(e.target.value)}
                   >
                     {[...Array(10).keys()].map((item) => {
@@ -56,12 +63,15 @@ const Pizza = ({ pizza }) => {
                 <div>
                   <button type="button" class="btn btn-dark">
                     <span className="badge bg-dark">
-                      Prices : $ {pizza.prices[0][varient] * quentity}
+                      Prices : ${" "}
+                      {pizza.prices[0][varient] * quentitys < 10
+                        ? "0" + pizza.prices[0][varient] * quentitys
+                        : pizza.prices[0][varient] * quentitys}
                     </span>
                   </button>
                 </div>
                 <div>
-                  <button className="btn btn-primary">
+                  <button className="btn btn-primary" onClick={addToCart}>
                     <i className="bi bi-bag-plus p-2"></i>
                     Add Cart
                   </button>
