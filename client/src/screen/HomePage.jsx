@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from "react";
+import Loading from "../components/Loading";
+import Message from "../components/Message";
 import Pizza from "../components/Pizza";
 import getAllPizzaAction from "../context/actions/PizzaActions";
 import { GlobalContext } from "../context/Provider";
@@ -7,16 +9,15 @@ const HomePage = () => {
   const { allPizzaState, dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
-    // pizza Action from the actions dir
     getAllPizzaAction()(dispatch);
   }, [dispatch]);
 
   return (
     <div className="container">
       {allPizzaState.loading ? (
-        <h1>loading..</h1>
+        <Loading />
       ) : allPizzaState.error ? (
-        <h1>someting want wrong</h1>
+        <Message error="something want wrong!" signveritent="alert-danger" />
       ) : (
         <div className="row">
           {allPizzaState.data.map((pizza, id) => {
