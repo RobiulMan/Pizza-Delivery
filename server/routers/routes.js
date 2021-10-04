@@ -1,9 +1,16 @@
 const pizzaRoute = require('./pizzaRoute');
+const registerRoute = require('./registerRoute');
+const loginRoute = require('./loginRoute');
 
 const routes = [
     {
         path: '/api',
         handler: pizzaRoute
+    },
+    { path: '/api/user', handler: registerRoute },
+    {
+        path: '/api/user',
+        handler: loginRoute
     }
 ];
 

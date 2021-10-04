@@ -12,14 +12,14 @@ const Pizza = ({ pizza }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { cartItemState, cartdispatch } = useContext(GlobalContext);
+  const { cartdispatch } = useContext(GlobalContext);
 
   function addToCart() {
     addToCartAction(pizza, quentitys, varient)(cartdispatch);
   }
   return (
     <>
-      <div className="card mb-3">
+      <div className="card mb-3 mt-5">
         <div className="row g-0">
           <div>
             <button style={{ border: "none", padding: 0 }} onClick={handleShow}>
@@ -71,7 +71,7 @@ const Pizza = ({ pizza }) => {
                   </button>
                 </div>
                 <div>
-                  <button className="btn btn-primary" onClick={addToCart}>
+                  <button className="btn btn-color" onClick={addToCart}>
                     <i className="bi bi-bag-plus p-2"></i>
                     Add Cart
                   </button>

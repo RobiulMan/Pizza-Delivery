@@ -1,6 +1,7 @@
 const Pizza = require('../models/Pizza');
 
 const getAllPizzaController = async (req, res) => {
+    console.log(req.cookies);
     try {
         const data = await Pizza.find({});
         res.status(200).json(data);
