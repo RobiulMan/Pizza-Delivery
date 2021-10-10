@@ -13,8 +13,8 @@ const registerPostController = async (req, res) => {
             const hashPassword = await bcrypt.hash(password, 10);
             const newUser = new User({ name, email, password: hashPassword });
 
-            const returndata = await newUser.save();
-            console.log(returndata);
+            await newUser.save();
+
             res.send('User Registation Successfully');
         }
     } catch (error) {
