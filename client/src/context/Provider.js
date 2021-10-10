@@ -5,6 +5,7 @@ import userInfo from './intialstates/userInfo'
 import CartReducer from './reducers/CartReducer'
 import loginReducer from './reducers/loginReducer'
 import getAllPizzaReducers from './reducers/PizzaReducers'
+import placeOrderReducer from './reducers/PlaceOrderReducer'
 import userReducer from './reducers/userReducer'
 
 export const GlobalContext = createContext({})
@@ -13,6 +14,7 @@ export const GlobalProvider = ({children}) =>{
     const [cartItemState, cartdispatch] = useReducer(CartReducer, cartItems)
     const [userState, userdispatch] = useReducer(userReducer, {})
     const [loginState, logindispatch] = useReducer(loginReducer,userInfo)
+    const [placeOrderState, placeorderdispatch] = useReducer(placeOrderReducer, {})
     
     
     
@@ -21,7 +23,8 @@ export const GlobalProvider = ({children}) =>{
     },[cartItemState])
 
     return(
-        <GlobalContext.Provider value={{allPizzaState,dispatch,cartItemState,cartdispatch,userState, userdispatch,loginState, logindispatch}}>
+        <GlobalContext.Provider 
+        value={{allPizzaState,dispatch,cartItemState,cartdispatch,userState, userdispatch,loginState, logindispatch,placeOrderState, placeorderdispatch}}>
         {children}
     </GlobalContext.Provider>
     )

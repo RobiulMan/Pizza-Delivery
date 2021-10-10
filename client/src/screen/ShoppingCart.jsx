@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import CheckoutButton from "../components/CheckoutButton";
 import {
   addToCartAction,
   deleteFromCart
@@ -181,9 +182,7 @@ const ShoppingCart = () => {
                 </li>
               </ul>
               <div className="d-grid gap-2 mx-auto">
-                <button type="button" className="btn btn-primary">
-                  go to checkout
-                </button>
+                <CheckoutButton totalSubPrice={totalSubPrice} />
               </div>
             </div>
           </div>
