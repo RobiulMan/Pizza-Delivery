@@ -1,7 +1,7 @@
 const pizzaRoute = require('./pizzaRoute');
 const registerRoute = require('./registerRoute');
 const loginRoute = require('./loginRoute');
-const placeOrderRoute = require('./placeOrderRoute');
+const placeOrderRoute = require('./orderRoute');
 
 const routes = [
     {
