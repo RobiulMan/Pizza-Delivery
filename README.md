@@ -8,9 +8,13 @@ This project was bootstrapped with [expressjs](https://expressjs.com/).
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run: express
+`yarn dev`
 
-### `yarn start:dev`
+
+In the client directory, you can run: react
+ `cd client`
+ `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3010](http://localhost:3010) to view it in the browser.
