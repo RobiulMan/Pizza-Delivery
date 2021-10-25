@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from "react";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 import Pizza from "../components/Pizza";
-import getAllPizzaAction from "../context/actions/PizzaActions";
+import Search from "../components/Search";
+import { getAllPizzaAction } from "../context/actions/PizzaActions";
 import { GlobalContext } from "../context/Provider";
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
+      <Search />
       {allPizzaState.loading ? (
         <Loading />
       ) : allPizzaState.error ? (
