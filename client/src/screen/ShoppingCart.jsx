@@ -46,7 +46,7 @@ const ShoppingCart = () => {
                                 Size: <strong>{item.varient}</strong>
                               </p>
                             </div>
-                            <div class="mb-2 text-center">
+                            <div className="mb-2 text-center">
                               <div className="d-flex col-7 m-auto">
                                 <button
                                   className="minus btn"
@@ -58,7 +58,7 @@ const ShoppingCart = () => {
                                     )(cartdispatch)
                                   }
                                 >
-                                  <i class="bi bi-dash-lg"></i>
+                                  <i className="bi bi-dash-lg"></i>
                                 </button>
                                 <input
                                   className="form-control "
@@ -77,7 +77,7 @@ const ShoppingCart = () => {
                                     )(cartdispatch)
                                   }
                                 >
-                                  <i class="bi bi-plus-lg"></i>
+                                  <i className="bi bi-plus-lg"></i>
                                 </button>
                               </div>
                               <small>Quentity</small>
@@ -92,7 +92,7 @@ const ShoppingCart = () => {
                                   deleteFromCart(item)(cartdispatch);
                                 }}
                               >
-                                <i class="bi bi-trash mr-1"></i> Remove item
+                                <i className="bi bi-trash mr-1"></i> Remove item
                               </button>
                             </div>
                             <p className="mb-0">

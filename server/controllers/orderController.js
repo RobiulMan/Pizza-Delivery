@@ -54,8 +54,7 @@ const placeOrderController = async (req, res) => {
 
 const getOrderController = async (req, res) => {
     const { loginUserInfo } = req.body;
-    console.log(req.body);
-    console.log(loginUserInfo.id);
+
     try {
         const order = await Order.find({ userId: loginUserInfo.id }).sort({ _id: -1 });
         res.json({
@@ -68,4 +67,28 @@ const getOrderController = async (req, res) => {
     }
 };
 
-module.exports = { placeOrderController, getOrderController };
+const getAllOrderController = async (req, res) => {
+    try {
+        //
+        const orders = await Order.find({});
+        res.json(orders);
+    } catch (err) {
+        //
+        res.status(400).json({ message: err });
+    }
+};
+
+const deliverOrderController = async (req, res) => {
+    const { deliverItem } = req.body;
+    try {
+        //
+    } catch (err) {
+        //
+    }
+};
+module.exports = {
+    placeOrderController,
+    getOrderController,
+    getAllOrderController,
+    deliverOrderController
+};

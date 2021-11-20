@@ -25,7 +25,7 @@ const Navbar = () => {
             aria-label="Toggle navigation"
           >
             <span className="">
-              <i class="bi bi-list"></i>
+              <i className="bi bi-list"></i>
             </span>
           </button>
           <div
@@ -42,13 +42,26 @@ const Navbar = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i class="bi bi-person"></i>
+                    <i className="bi bi-person"></i>
                     {loginState.loginUserInfo.name}
                   </button>
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
+                    {loginState.loginUserInfo.isAdmin ? (
+                      <li>
+                        <Link
+                          className="nav-link dropdown-item"
+                          aria-current="page"
+                          to="/admin"
+                        >
+                          Admin
+                        </Link>
+                      </li>
+                    ) : (
+                      ""
+                    )}
                     <li>
                       <Link
                         className="nav-link dropdown-item"
@@ -83,7 +96,7 @@ const Navbar = () => {
               )}
               <li className="nav-item">
                 <Link className="nav-link" to="/cart">
-                  <i class="bi bi-bag">
+                  <i className="bi bi-bag">
                     {" "}
                     Cart
                     <span className="badge bg-danger">

@@ -5,7 +5,7 @@ import { GlobalContext } from "../context/Provider";
 const Search = () => {
   const { dispatch } = useContext(GlobalContext);
   const [opetion, setOpetion] = useState(true);
-  const [catagory, setCatagory] = useState("All");
+  const [category, setCategory] = useState("All");
   const [searchKey, setSearchKey] = useState("");
 
   return (
@@ -22,8 +22,8 @@ const Search = () => {
                 aria-expanded={!opetion}
               >
                 <div className="choices__inner">
-                  <select style={{ display: "none" }} value={catagory}>
-                    <option value={catagory} selected="">
+                  <select style={{ display: "none" }} value={category}>
+                    <option value={category} selected="">
                       All
                     </option>
                   </select>
@@ -34,7 +34,7 @@ const Search = () => {
                         opetion ? setOpetion(false) : setOpetion(true);
                       }}
                     >
-                      {catagory}
+                      {category}
                     </div>
                   </div>
                 </div>
@@ -47,10 +47,10 @@ const Search = () => {
                   <div className="choices__list" dir="ltr" role="listbox">
                     <div
                       className={`choices__item choices__item--choice choices__item--selectable  is-highlighted ${
-                        catagory === "All" ? "choices__placeholder" : ""
+                        category === "All" ? "choices__placeholder" : ""
                       }`}
                       onClick={(e) => {
-                        setCatagory(e.target.innerText);
+                        setCategory(e.target.innerText);
                         setOpetion(true);
                       }}
                     >
@@ -58,10 +58,10 @@ const Search = () => {
                     </div>
                     <div
                       className={`choices__item choices__item--choice choices__item--selectable  is-highlighted ${
-                        catagory === "Veg" ? "choices__placeholder" : ""
+                        category === "Veg" ? "choices__placeholder" : ""
                       }`}
                       onClick={(e) => {
-                        setCatagory(e.target.innerText);
+                        setCategory(e.target.innerText);
                         setOpetion(true);
                       }}
                     >
@@ -69,10 +69,10 @@ const Search = () => {
                     </div>
                     <div
                       className={`choices__item choices__item--choice choices__item--selectable  is-highlighted ${
-                        catagory === "Nonveg" ? "choices__placeholder" : ""
+                        category === "Nonveg" ? "choices__placeholder" : ""
                       }`}
                       onClick={(e) => {
-                        setCatagory(e.target.innerText);
+                        setCategory(e.target.innerText);
                         setOpetion(true);
                       }}
                     >
@@ -99,7 +99,7 @@ const Search = () => {
               className="btn-search"
               type="button"
               onClick={() => {
-                searchPizzaAction(searchKey, catagory)(dispatch);
+                searchPizzaAction(searchKey, category)(dispatch);
               }}
             >
               <svg

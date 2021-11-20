@@ -120,6 +120,13 @@ const Registation = () => {
           </p>
         </div>
       </div>
+      <div className="col-sm-6 px-0 d-none d-sm-block">
+        <img
+          src="https://i.ibb.co/ThqqVHc/Apizza.jpg"
+          alt="login"
+          className="login-img"
+        />
+      </div>
     </div>
   );
 };

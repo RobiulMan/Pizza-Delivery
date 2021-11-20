@@ -52,3 +52,48 @@ export const placeOrderAction = (token, subtotal,cartItemState, loginState) => a
     }
 }
 
+
+
+export const getAllOrdersAction = () => async (dispatch) => {
+
+    dispatch({type: "GET_ALLORDER_REQUEST"});
+    try{
+        const res = await fetch('/api/order/allorder')
+        const order = await res.json();
+    
+        console.log(order)
+        dispatch({type: "GET_ALLORDER_SUCCESS", loading: false, payload: order});
+
+    }catch(error) {
+        dispatch({type: "GET_ALLORDER_FAILED",loading: false,data: [],error: error.message});
+    }
+}
+
+
+
+export const deliverOrdersAction = (deliverId) => async (dispatch) => {
+
+    dispatch({type: "ORDER_DELIVER_REQUEST"});
+    try{
+        const res = await fetch('/api/order/deliver',,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                 "Accept": "application/json",
+    
+            },
+            mode: 'cors',
+            body: JSON.stringify(deliverId)
+           
+        })
+        const order = await res.json();
+    
+
+        dispatch({type: "ORDER_DELIVER_SUCCESS", loading: false, payload: order});
+
+    }catch(error) {
+        dispatch({type: "ORDER_DELIVER_FAILED",loading: false,data: [],error: error.message});
+    }
+}
+

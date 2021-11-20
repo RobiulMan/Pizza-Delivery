@@ -38,3 +38,43 @@ export const getUserOrderReducers = (state=[], action) => {
     }
 }
 
+
+
+export const getAllOrderReducers = (state=[], action) => {
+    
+    switch(action.type) {
+        case 'GET_ALLORDER_REQUEST':return{
+            loading: true
+        }
+        case 'GET_ALLORDER_SUCCESS': return{
+            loading: false,
+            order: action.payload,
+            
+        }
+        case 'GET_ALLORDER_FAILED':  return{
+            loading: false,
+            error: action.error
+        }
+        default : return state;
+    }
+}
+
+export const deliverOrdersReducer = (state=[], action) => {
+    
+    switch(action.type) {
+        case 'ORDER_DELIVER_REQUEST':return{
+            loading: true
+        }
+        case 'ORDER_DELIVER_SUCCESS': return{
+            loading: false,
+            order: action.payload,
+            
+        }
+        case 'ORDER_DELIVER_FAILED':  return{
+            loading: false,
+            error: action.error
+        }
+        default : return state;
+    }
+}
+
