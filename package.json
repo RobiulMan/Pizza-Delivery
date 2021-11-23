@@ -2,14 +2,20 @@
   "name": "pizza-delivery",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "12.21.0",
+    "yarn": "1.22.17"
+  },
   "repository": "https://github.com/RobiulMan/Pizza-Delivery.git",
   "author": "RobiulMan <robiulislam.bg@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "client-install": "yarn install --prefix client",
+    "client": "yarn start --prefix client",
     "start": "node ./server/server",
-    "dev": "nodemon ./server/server",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start:dev": "nodemon ./server/server",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn install --prefix client && yarn run build --prefix client"
   },
   "dependencies": {
     "axios": "^0.22.0",
