@@ -2,6 +2,7 @@ const pizzaRoute = require('./pizzaRoute');
 const registerRoute = require('./registerRoute');
 const loginRoute = require('./loginRoute');
 const placeOrderRoute = require('./orderRoute');
+const getAllUser = require('./userRoute');
 
 const routes = [
     {
@@ -12,6 +13,10 @@ const routes = [
     {
         path: '/api/user',
         handler: loginRoute
+    },
+    {
+        path: '/api/user',
+        handler: getAllUser
     },
     {
         path: '/api/order',

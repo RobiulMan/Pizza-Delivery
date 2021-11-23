@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Message from "../components/Message";
-import userAction from "../context/actions/userActions";
+import { userAction } from "../context/actions/userActions";
 import { GlobalContext } from "../context/Provider";
 import "./Login.css";
 const Registation = () => {
@@ -119,6 +119,13 @@ const Registation = () => {
             </Link>
           </p>
         </div>
+      </div>
+      <div className="col-sm-6 px-0 d-none d-sm-block">
+        <img
+          src="https://i.ibb.co/ThqqVHc/Apizza.jpg"
+          alt="login"
+          className="login-img"
+        />
       </div>
     </div>
   );

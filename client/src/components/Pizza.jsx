@@ -61,7 +61,7 @@ const Pizza = ({ pizza }) => {
               </div>
               <div className="d-flex  justify-content-between">
                 <div>
-                  <button type="button" class="btn btn-dark">
+                  <button type="button" className="btn btn-dark">
                     <span className="badge bg-dark">
                       Prices : ${" "}
                       {pizza.prices[0][varient] * quentitys < 10

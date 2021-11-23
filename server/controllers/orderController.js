@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_KEY);
+const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const Order = require('../models/OrderModel');
 
@@ -54,8 +55,7 @@ const placeOrderController = async (req, res) => {
 
 const getOrderController = async (req, res) => {
     const { loginUserInfo } = req.body;
-    console.log(req.body);
-    console.log(loginUserInfo.id);
+
     try {
         const order = await Order.find({ userId: loginUserInfo.id }).sort({ _id: -1 });
         res.json({
@@ -68,4 +68,42 @@ const getOrderController = async (req, res) => {
     }
 };
 
-module.exports = { placeOrderController, getOrderController };
+const getAllOrderController = async (req, res) => {
+    try {
+        const orders = await Order.find({});
+        res.json(orders);
+    } catch (err) {
+        res.status(400).json({ message: err });
+    }
+};
+
+const deliverOrderController = async (req, res) => {
+    const { deliverId } = req.body;
+
+    const isMongooesId = mongoose.Types.ObjectId.isValid(deliverId);
+
+    try {
+        if (isMongooesId) {
+            await Order.findOneAndUpdate(
+                { _id: deliverId },
+                {
+                    $set: {
+                        isDelivered: true
+                    }
+                },
+                { new: true }
+            );
+        }
+
+        res.send('Order Delivered Succesfully');
+    } catch (err) {
+        //
+        res.status(400).json({ message: 'something want wrong' });
+    }
+};
+module.exports = {
+    placeOrderController,
+    getOrderController,
+    getAllOrderController,
+    deliverOrderController
+};
