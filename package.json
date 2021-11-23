@@ -10,12 +10,9 @@
   "author": "RobiulMan <robiulislam.bg@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "client-install": "yarn install --prefix client",
-    "client": "yarn start --prefix client",
     "start": "node ./server/server",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start:dev": "nodemon ./server/server",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn install --prefix client && yarn run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn install && cd client && yarn install  && yarn build"
   },
   "dependencies": {
     "axios": "^0.22.0",
