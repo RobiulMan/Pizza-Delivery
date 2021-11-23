@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Message from "../components/Message";
-import userAction from "../context/actions/userActions";
+import { userAction } from "../context/actions/userActions";
 import { GlobalContext } from "../context/Provider";
 import "./Login.css";
 const Registation = () => {

@@ -88,7 +88,7 @@ const updatePizzaController = async (req, res) => {
 
     try {
         if (isMongooesId) {
-            const data = await Pizza.findOneAndUpdate(
+            await Pizza.findOneAndUpdate(
                 { _id: updatePizza.id },
                 {
                     $set: {
@@ -102,12 +102,6 @@ const updatePizzaController = async (req, res) => {
                 { new: true }
             );
 
-            // const pizza = await Pizza.findOne({ _id: updatePizza.id });
-            // (pizza.name = updatePizza.name)((pizza.description = updatePizza.description))(
-            //     (pizza.image = updatePizza.image)
-            // )((pizza.category = updatePizza.category))((pizza.prices = [updatePizza.prices]));
-            // const data = await pizza.save();
-            console.log(data);
             res.send('pizza detiles updated successfully');
         }
     } catch (err) {

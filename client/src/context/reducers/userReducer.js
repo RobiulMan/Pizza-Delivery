@@ -1,4 +1,4 @@
-const userReducer = (state={}, action) => {
+export const userReducer = (state={}, action) => {
     switch(action.type) {
         case 'USER_REGISTER_REQUEST': return {
             loading: true
@@ -15,5 +15,26 @@ const userReducer = (state={}, action) => {
     }
 }
 
-export default userReducer
+
+export const getAllUserReducers = (state={}, action) => {
+    
+    switch(action.type) {
+        case 'GET_ALLUSER_REQUEST': return{
+            loading: true
+          
+        }
+        case 'GET_ALLUSER_SUCCESS': return{
+            loading: false,
+            data: action.data,
+      
+        }
+        case 'GET_ALLUSER_FAILED':  return{
+            loading: false,
+            
+            error: action.error
+        }
+        default : return state;
+    }
+}
+
 

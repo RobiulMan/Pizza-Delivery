@@ -73,9 +73,9 @@ export const getAllOrdersAction = () => async (dispatch) => {
 
 export const deliverOrdersAction = (deliverId) => async (dispatch) => {
 
-    dispatch({type: "ORDER_DELIVER_REQUEST"});
+    
     try{
-        const res = await fetch('/api/order/deliver',,{
+        await fetch('/api/order/deliver',{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -84,16 +84,19 @@ export const deliverOrdersAction = (deliverId) => async (dispatch) => {
     
             },
             mode: 'cors',
-            body: JSON.stringify(deliverId)
+            body: JSON.stringify({deliverId})
            
         })
+        
+        const res = await fetch('/api/order/allorder')
         const order = await res.json();
     
-
-        dispatch({type: "ORDER_DELIVER_SUCCESS", loading: false, payload: order});
+        console.log(order)
+        alert('order delivered successfully')
+        dispatch({type: "GET_ALLORDER_SUCCESS", loading: false, payload: order});
 
     }catch(error) {
-        dispatch({type: "ORDER_DELIVER_FAILED",loading: false,data: [],error: error.message});
+        console.log(error);
     }
 }
 

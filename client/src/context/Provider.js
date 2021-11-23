@@ -6,7 +6,7 @@ import CartReducer from './reducers/CartReducer'
 import loginReducer from './reducers/loginReducer'
 import { getAllOrderReducers, getUserOrderReducers, placeOrderReducer } from './reducers/OrderReducer'
 import { addPizzaReducers, getAllPizzaReducers, getPizzaByIdReducer, updatePizzaReducers } from './reducers/PizzaReducers'
-import userReducer from './reducers/userReducer'
+import { getAllUserReducers, userReducer } from './reducers/userReducer'
 
 export const GlobalContext = createContext({})
 export const GlobalProvider = ({children}) =>{
@@ -20,7 +20,7 @@ export const GlobalProvider = ({children}) =>{
     const [getPizzaByIdState, getPizzaByIddispatch] = useReducer(getPizzaByIdReducer,{})
     const [updatePizzaState, updatePizzadispatch] = useReducer(updatePizzaReducers, {})
     const [getAllOrderState, getallorderdispatch] = useReducer(getAllOrderReducers, [])
-    
+    const [getAllUser, getAllUserdispatch] = useReducer(getAllUserReducers, {})
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItemState.cartItems))
     },[cartItemState])
@@ -37,7 +37,8 @@ export const GlobalProvider = ({children}) =>{
                 addPizzaState, addpizzadispatch,getPizzaByIdState,
                  getPizzaByIddispatch,updatePizzaState,
                   updatePizzadispatch,
-                  getAllOrderState, getallorderdispatch}
+                  getAllOrderState, getallorderdispatch,
+                  getAllUser, getAllUserdispatch}
                   }>
         {children}
     </GlobalContext.Provider>

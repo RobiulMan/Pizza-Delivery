@@ -1,7 +1,10 @@
 import { useContext, useEffect } from "react";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
-import { getAllOrdersAction } from "../context/actions/OrderAction";
+import {
+  deliverOrdersAction,
+  getAllOrdersAction
+} from "../context/actions/OrderAction";
 import { GlobalContext } from "../context/Provider";
 
 const OrdersList = () => {
@@ -44,11 +47,13 @@ const OrdersList = () => {
                       <td>{item.createdAt.substring(0, 10)}</td>
                       <td>
                         {item.isDelivered ? (
-                          <span class="badge bg-success">Delivered</span>
+                          <span className="badge bg-success">Delivered</span>
                         ) : (
                           <button
                             className="btn btn-color"
-                            onClick={deliver(item._id)}
+                            onClick={() =>
+                              deliverOrdersAction(item._id)(getallorderdispatch)
+                            }
                           >
                             Delivered
                           </button>
