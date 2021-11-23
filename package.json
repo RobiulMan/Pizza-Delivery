@@ -10,7 +10,10 @@
   "author": "RobiulMan <robiulislam.bg@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "client-install": "cd client && yarn install",
+    "client": "yarn start --prefix client",
     "start": "node ./server/server",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start:dev": "nodemon ./server/server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn install && cd client && yarn install  && yarn build"
   },
