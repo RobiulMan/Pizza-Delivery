@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 const setRoutes = require('./routers/routes');
 const dbConnection = require('./DB/dbConnection');
-
+console.log(path.resolve(__dirname))
 dbConnection();
 const PORT = process.env.PORT || 8000;
 app.use(express.json());
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static('client/build'));
 
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
+        res.sendFile(path.resolve(__dirname, './client/build/index.html'));
     });
 }
 app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
