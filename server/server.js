@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const path = require('path');
+const filePath = require('../filePath.js')
 
 const app = express();
 const setRoutes = require('./routers/routes');
@@ -21,8 +21,8 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static('../client/build'));
     app.get('*', function (req, res) {
        //const index = path.join('app/client/build', 'index.html');
-       const index = path.resolve('../app/client/build/', 'index.html')
-        res.sendFile(index);
+       //const index = path.resolve('../app/client/build/', 'index.html')
+        res.sendFile(filePath());
     });
 }
 app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
