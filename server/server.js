@@ -19,10 +19,11 @@ app.use(morgan('dev'));
 setRoutes(app);
 if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static('../client/build'));
-    app.get('*', function (req, res) {
+    app.get('*', function  (req, res) {
        //const index = path.join('app/client/build', 'index.html');
        //const index = path.resolve('../app/client/build/', 'index.html')
-        res.sendFile(filePath());
+       const index = filePath()
+        res.sendFile(index);
     });
 }
 app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
