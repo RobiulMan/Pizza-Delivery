@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
        //const index = path.join(__dirname,'/client/build', 'index.html');
        //const index = path.resolve('../app/client/build/', 'index.html')
       
-       res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
+       res.sendFile(path.join(__dirname, '/client/build/index.html'));
     });
 }
 app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
