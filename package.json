@@ -1,7 +1,7 @@
 {
   "name": "pizza-delivery",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "20.11.0",
     "npm": "10.2.4"
