@@ -27,7 +27,7 @@ const AddPizza = () => {
     };
 
     addPizzaAction(pizza)(addpizzadispatch);
-          // reset the form
+    // reset the form
     if (addPizzaState.success) {
 
       setPizzaName("");
