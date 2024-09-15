@@ -19,11 +19,11 @@ app.use(morgan('dev'));
 setRoutes(app);
 if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static('client/build'));
-    app.get('*', function  (req, res) {
+    app.get('*', function(req, res) {
         const index = path.join(__dirname, './client/build/', 'index.html');
-       //const index = path.resolve('../app/client/build/', 'index.html')
-      
-       res.sendFile(index);
+        //const index = path.resolve('../app/client/build/', 'index.html')
+
+        res.sendFile(index);
     });
 }
 app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
@@ -45,3 +45,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`));
+
+module.exports = app;

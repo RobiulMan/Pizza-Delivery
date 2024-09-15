@@ -15,7 +15,8 @@
         "dev": "concurrently \"npm run server\" \"npm run start\"",
         "start:dev": "nodemon ./server/server",
         "start": "node server/server.js",
-        "heroku-postbuild": "cd client && npm install && npm run build"
+        "heroku-postbuild": "cd client && npm install && npm run build",
+        "vercel-build": "echo hello"
     },
     "dependencies": {
         "axios": "^0.22.0",
