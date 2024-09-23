@@ -7,21 +7,21 @@ const getAllUser = require('./userRoute');
 const routes = [
     {
         path: '/api',
-        handler: pizzaRoute
+        handler: pizzaRoute,
     },
     { path: '/api/user', handler: registerRoute },
     {
         path: '/api/user',
-        handler: loginRoute
+        handler: loginRoute,
     },
     {
         path: '/api/user',
-        handler: getAllUser
+        handler: getAllUser,
     },
     {
         path: '/api/order',
-        handler: placeOrderRoute
-    }
+        handler: placeOrderRoute,
+    },
 ];
 
 const setRoutes = (app) => {

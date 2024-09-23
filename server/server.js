@@ -2,31 +2,35 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-
+const cookeParser = require('cookie-parser');
 
 const app = express();
 const setRoutes = require('./routers/routes');
 const dbConnection = require('./DB/dbConnection');
+const cookieParser = require('cookie-parser');
 
 dbConnection();
 const PORT = process.env.PORT || 8000;
+
 app.use(express.json());
 app.use(cors());
 
 app.use(morgan('dev'));
+app.use(cookieParser());
 
 // all routers here from the router dir
 setRoutes(app);
-if (process.env.NODE_ENV === 'production') {
-    app.use('/', express.static('client/build'));
-    app.get('*', function(req, res) {
-        const index = path.join(__dirname, './client/build/', 'index.html');
-        //const index = path.resolve('../app/client/build/', 'index.html')
 
-        res.sendFile(index);
-    });
-}
-app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
+// if (process.env.NODE_ENV === 'production') {
+//     app.use('/', express.static('client/build'));
+//     app.get('*', function (req, res) {
+//         const index = path.join(__dirname, './client/build/', 'index.html');
+//         //const index = path.resolve('../app/client/build/', 'index.html')
+//
+//         res.sendFile(index);
+//     });
+// }
+// app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
 
 app.use((req, res, next) => {
     const error = new Error('404 Page Not Found');

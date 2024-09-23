@@ -12,7 +12,6 @@
     "scripts": {
         "client-install": "cd client && yarn install",
         "client": "yarn start --prefix client",
-        "dev": "concurrently \"npm run server\" \"npm run start\"",
         "start:dev": "nodemon ./server/server",
         "start": "node server/server.js",
         "heroku-postbuild": "cd client && npm install && npm run build",
@@ -22,6 +21,7 @@
         "axios": "^0.22.0",
         "bcrypt": "^5.0.1",
         "concurrently": "^8.2.2",
+        "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
