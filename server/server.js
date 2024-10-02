@@ -1,21 +1,24 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const cookeParser = require('cookie-parser');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
 
 const app = express();
-const setRoutes = require('./routers/routes');
-const dbConnection = require('./DB/dbConnection');
-const cookieParser = require('cookie-parser');
+const setRoutes = require("./routers/routes");
+const dbConnection = require("./DB/dbConnection");
+const cookieParser = require("cookie-parser");
 
 dbConnection();
 const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: process.env.CLIENT_URL,
+    }),
+);
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(cookieParser());
 
 // all routers here from the router dir
@@ -30,10 +33,10 @@ setRoutes(app);
 //         res.sendFile(index);
 //     });
 // }
-// app.get('/', (req, res) => res.status(200).send(`Server working${PORT}`));
+app.get("/", (req, res) => res.status(200).send(`Server working${PORT}`));
 
 app.use((req, res, next) => {
-    const error = new Error('404 Page Not Found');
+    const error = new Error("404 Page Not Found");
     error.status = 404;
     next(error);
 });

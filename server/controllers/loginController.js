@@ -1,12 +1,12 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/UserModel');
-const generateToken = require('../utils/generateToken');
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+const User = require("../models/UserModel");
+const generateToken = require("../utils/generateToken");
+const jwt = require("jsonwebtoken");
 const generateAccessAndRefereshToekns = async (userId) => {
     try {
         const user = await User.findById(userId);
         if (!user) {
-            throw new Error('user not found');
+            throw new Error("user not found");
         }
         const accessToken = user.generateAccessToken();
         const refreshToken = user.generateRefreshToken();
@@ -16,7 +16,7 @@ const generateAccessAndRefereshToekns = async (userId) => {
 
         return { accessToken, refreshToken };
     } catch (error) {
-        throw new Error('something went wrong!');
+        throw new Error("something went wrong!");
     }
 };
 
@@ -30,7 +30,7 @@ const loginUserController = async (req, res) => {
             const { accessToken, refreshToken } =
                 await generateAccessAndRefereshToekns(user._id);
             const loggedInUser = await User.findById(user._id).select(
-                '-password -refresToken',
+                "-password -refresToken",
             );
 
             const options = {
@@ -39,11 +39,16 @@ const loginUserController = async (req, res) => {
             };
 
             res.status(200)
-                .cookie('accessToekn', accessToken, options)
-                .cookie('refreshToken', refreshToken, options)
-                .json({ user: loggedInUser, accessToken, refreshToken });
+                .cookie("accessToekn", accessToken, options)
+                .cookie("refreshToken", refreshToken, options)
+                .json({
+                    isAdmin: user?.isAdmin,
+                    user: loggedInUser,
+                    accessToken,
+                    refreshToken,
+                });
         } else {
-            res.status(401).send('user does not exist');
+            res.status(401).send("user does not exist");
         }
     } catch (err) {
         throw new Error(err);
@@ -55,7 +60,7 @@ const refreshAccessTokenController = async (req, res) => {
             req.cookies.refresToken || req.body.refresToken;
 
         if (incomingRefreshToken) {
-            throw new Error('unauthorized request');
+            throw new Error("unauthorized request");
         }
 
         const decodedToken = jwt.verify(
@@ -66,11 +71,11 @@ const refreshAccessTokenController = async (req, res) => {
         const user = await User.findById(decodedToken?._id);
 
         if (!user) {
-            throw new Error('Invlid refreshToken');
+            throw new Error("Invlid refreshToken");
         }
 
         if (incomingRefreshToken !== user?.refreshToken) {
-            throw new Error('refresh token is expired or used');
+            throw new Error("refresh token is expired or used");
         }
 
         const options = {
@@ -81,8 +86,8 @@ const refreshAccessTokenController = async (req, res) => {
             await generateAccessAndRefereshToekns(user._id);
 
         res.status(200)
-            .cookie('accessToken', accessToken, options)
-            .cookie('refreshToken', refreshToken, options)
+            .cookie("accessToken", accessToken, options)
+            .cookie("refreshToken", refreshToken, options)
             .json({
                 newAccessToken: accessToken,
                 newRefreshToken: refreshToken,
@@ -112,9 +117,9 @@ const logoutUserController = async (req, res) => {
         };
 
         res.status(200)
-            .clearCookie('accessToekn', options)
-            .clearCookie('refreshToken', options)
-            .json('user logged out');
+            .clearCookie("accessToekn", options)
+            .clearCookie("refreshToken", options)
+            .json("user logged out");
     } catch (error) {
         throw new Error(error);
     }

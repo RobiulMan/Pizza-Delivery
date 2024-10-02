@@ -1,6 +1,6 @@
 // const redis = require('redis');
-const mongoose = require('mongoose');
-const Pizza = require('../models/Pizza');
+const mongoose = require("mongoose");
+const Pizza = require("../models/Pizza");
 
 // const client = redis.createClient({
 //     host: '127.0.0.1',
@@ -41,6 +41,18 @@ const getAllPizzaController = async (req, res) => {
         console.log(error);
     }
 };
+
+const getPizzaByIdController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const pizza = await Pizza.findById(id);
+        if (!pizza) return res.status(404).json({ message: "Pizza not found" });
+        res.status(200).json(pizza);
+    } catch (error) {
+        res.status(400).json({ message: error });
+    }
+};
+
 const addPizzaController = async (req, res) => {
     const pizza = req.body;
 
@@ -51,11 +63,11 @@ const addPizzaController = async (req, res) => {
             varients: Object.keys(pizza.prices),
             description: pizza.description,
             category: pizza.category,
-            prices: [pizza.prices]
+            prices: [pizza.prices],
         });
         await addpizza.save();
 
-        res.send('new Pizza added successfuly');
+        res.status(201).send("new Pizza added successfuly");
         //
     } catch (err) {
         //
@@ -68,7 +80,6 @@ const pizzaByIdController = async (req, res) => {
     const isMongooesId = mongoose.Types.ObjectId.isValid(pizzaId);
 
     try {
-        console.log(pizzaId);
         if (isMongooesId) {
             const pizza = await Pizza.findOne({ _id: pizzaId });
             // console.log(pizza);
@@ -96,13 +107,13 @@ const updatePizzaController = async (req, res) => {
                         description: updatePizza.description,
                         image: updatePizza.image,
                         category: updatePizza.category,
-                        prices: [updatePizza.prices]
-                    }
+                        prices: [updatePizza.prices],
+                    },
                 },
-                { new: true }
+                { new: true },
             );
 
-            res.send('pizza detiles updated successfully');
+            res.send("pizza detiles updated successfully");
         }
     } catch (err) {
         res.json({ message: err });
@@ -116,7 +127,7 @@ const deletePizzaController = async (req, res) => {
     try {
         if (isMongooesId) {
             await Pizza.findOneAndDelete({ _id: pizzaid });
-            res.send('pizza deleted succesfully');
+            res.send("pizza deleted succesfully");
         }
     } catch (err) {
         res.status(400).json({ message: err });
@@ -124,8 +135,9 @@ const deletePizzaController = async (req, res) => {
 };
 module.exports = {
     getAllPizzaController,
+    getPizzaByIdController,
     addPizzaController,
     pizzaByIdController,
     updatePizzaController,
-    deletePizzaController
+    deletePizzaController,
 };

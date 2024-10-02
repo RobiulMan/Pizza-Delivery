@@ -1,16 +1,17 @@
-import { useContext, useState } from "react";
-import Loading from "../components/Loading";
-import Message from "../components/Message";
-import { addPizzaAction } from "../context/actions/PizzaActions";
-import { GlobalContext } from "../context/Provider";
+import { useContext, useState } from 'react';
+import Loading from '../components/Loading';
+import Message from '../components/Message';
+import { addPizzaAction } from '../context/actions/PizzaActions';
+import { GlobalContext } from '../context/Provider';
+
 const AddPizza = () => {
-  const [pizzaName, setPizzaName] = useState("");
-  const [smallPrice, setSmallPrice] = useState("");
-  const [mediumPrice, SetMediumPrice] = useState("");
-  const [largePrice, setLeargPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [pizzaName, setPizzaName] = useState('');
+  const [smallPrice, setSmallPrice] = useState('');
+  const [mediumPrice, SetMediumPrice] = useState('');
+  const [largePrice, setLeargPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
   const { addPizzaState, addpizzadispatch } = useContext(GlobalContext);
   function formHandler(e) {
     e.preventDefault();
@@ -22,37 +23,40 @@ const AddPizza = () => {
       prices: {
         small: smallPrice,
         medium: mediumPrice,
-        large: largePrice
-      }
+        large: largePrice,
+      },
     };
 
     addPizzaAction(pizza)(addpizzadispatch);
     // reset the form
     if (addPizzaState.success) {
-
-      setPizzaName("");
-      setSmallPrice("");
-      SetMediumPrice("");
-      setLeargPrice("");
-      setDescription("");
-      setCategory("");
-      setImage("");
+      setPizzaName('');
+      setSmallPrice('');
+      SetMediumPrice('');
+      setLeargPrice('');
+      setDescription('');
+      setCategory('');
+      setImage('');
     }
   }
+
 
   return (
     <div>
       <h1>Add Pizza</h1>
-      {addPizzaState.loading ? <Loading /> : ""}
+      {addPizzaState.loading ? <Loading /> : ''}
       {addPizzaState.success ? (
         <Message
           error="new Pizza Added Successfuly!"
           signveritent="alert-success"
         />
       ) : addPizzaState.error ? (
-        <Message error="something want wrong!" signveritent="alert-danger" />
+        <Message
+          error="something want wrong!"
+          signveritent="alert-danger"
+        />
       ) : (
-        ""
+        ''
       )}
 
       <form onSubmit={formHandler}>
@@ -80,8 +84,8 @@ const AddPizza = () => {
             />
           </div>
           <div className="col mb-1">
+            type="text"
             <input
-              type="text"
               className="form-control"
               placeholder="medium varient price"
               name="m-varitnet-price"
@@ -134,8 +138,9 @@ const AddPizza = () => {
               required
             />
             <span>
-              upload image this site <a href="https://imgbb.com/">click</a> to
-              get image url afte that put the url in this files
+              upload image this site{' '}
+              <a href="https://imgbb.com/">click</a> to get image
+              url afte that put the url in this files
             </span>
           </div>
           <div className="d-grid gap-2">
