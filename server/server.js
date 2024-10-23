@@ -11,12 +11,16 @@ const cookieParser = require("cookie-parser");
 dbConnection();
 const PORT = process.env.PORT || 8000;
 
+const corsOptions = {
+    origin: ["http://localhost:3000", "https://pizza-shop-nnbt.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+    optionsSuccessStatus: 200,
+};
+
 app.use(express.json());
-app.use(
-    cors({
-        origin: process.env.CLIENT_URL,
-    }),
-);
+app.use(cors(corsOptions));
 
 app.use(morgan("dev"));
 app.use(cookieParser());
