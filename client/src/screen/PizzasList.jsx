@@ -4,11 +4,12 @@ import Loading from "../components/Loading";
 import Message from "../components/Message";
 import {
   deletePizzaAction,
-  getAllPizzaAction
+  getAllPizzaAction,
 } from "../context/actions/PizzaActions";
 import { GlobalContext } from "../context/Provider";
 const PizzzList = () => {
   const { allPizzaState, dispatch } = useContext(GlobalContext);
+  console.log(allPizzaState);
 
   useEffect(() => {
     getAllPizzaAction()(dispatch);
@@ -19,11 +20,14 @@ const PizzzList = () => {
       <h1>Order</h1>
       {allPizzaState.loading && <Loading />}
       {allPizzaState.error && (
-        <Message error="something want wrong!" signveritent="alert-primary" />
+        <Message
+          error="something want wrong!"
+          signveritent="alert-primary"
+        />
       )}
 
       <div className="table-responsive mt-4">
-        {allPizzaState.data && (
+        {allPizzaState.data.data && (
           <div className="table-responsive mt-4">
             <table className="table table-dark">
               <thead>
@@ -35,14 +39,16 @@ const PizzzList = () => {
                 </tr>
               </thead>
               <tbody>
-                {allPizzaState.data.map((item) => {
+                {allPizzaState.data.data.map((item) => {
                   return (
                     <tr key={item._id}>
                       <td>{item.name}</td>
 
                       <td>
-                        <strong>S </strong> : $ {item.prices[0]["small"]}
-                        <br /> <strong>M</strong> : $ {item.prices[0]["medium"]}
+                        <strong>S </strong> : ${" "}
+                        {item.prices[0]["small"]}
+                        <br /> <strong>M</strong> : ${" "}
+                        {item.prices[0]["medium"]}
                         <br /> <strong> L </strong> : ${" "}
                         {item.prices[0]["large"]}
                       </td>
@@ -57,7 +63,9 @@ const PizzzList = () => {
                         <button
                           className="btn btn-outline-secondary"
                           onClick={() => {
-                            deletePizzaAction(item._id)(dispatch);
+                            deletePizzaAction(
+                              item._id,
+                            )(dispatch);
                           }}
                         >
                           <i className="bi bi-trash"></i>

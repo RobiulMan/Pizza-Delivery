@@ -36,14 +36,15 @@ const getAllPizzaController = async (req, res) => {
 
         const page = parseInt(req.query.page) || 1; // Default to page 1
         const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
+        const category = req.query.category || ""; // Category filter
 
-        const data = await Pizza.find({});
+        const query = category && category !== "all" ? { category } : {};
+        const data = await Pizza.find(query);
 
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
 
         const results = data.slice(startIndex, endIndex);
-
         res.status(200).json({
             page: parseInt(page),
             limit: parseInt(limit),
@@ -52,7 +53,7 @@ const getAllPizzaController = async (req, res) => {
             data: results,
         });
     } catch (error) {
-        res.sataus(304).json(error);
+        res.status(304).json(error);
         console.log(error);
     }
 };

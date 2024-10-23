@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from 'react';
-import Loading from '../components/Loading';
-import Message from '../components/Message';
-import Pizza from '../components/Pizza';
-import Search from '../components/Search';
-import { getAllPizzaAction } from '../context/actions/PizzaActions';
-import { GlobalContext } from '../context/Provider';
+import React, { useContext, useEffect } from "react";
+import Loading from "../components/Loading";
+import Message from "../components/Message";
+import Pizza from "../components/Pizza";
+import Search from "../components/Search";
+import { getAllPizzaAction } from "../context/actions/PizzaActions";
+import { GlobalContext } from "../context/Provider";
 
 const HomePage = () => {
     const { allPizzaState, dispatch } = useContext(GlobalContext);
-
+    console.log(allPizzaState);
     useEffect(() => {
         getAllPizzaAction()(dispatch);
     }, [dispatch]);
@@ -25,7 +25,7 @@ const HomePage = () => {
                 />
             ) : (
                 <div className="row">
-                    {allPizzaState?.data.map((pizza, id) => {
+                    {allPizzaState?.data?.data.map((pizza, id) => {
                         return (
                             <div className="col-md-4" key={pizza._id}>
                                 <div>
