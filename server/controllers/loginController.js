@@ -1,3 +1,4 @@
+const { serialize } = require("cookie");
 const bcrypt = require("bcrypt");
 const User = require("../models/UserModel");
 const generateToken = require("../utils/generateToken");
@@ -41,8 +42,10 @@ const loginUserController = async (req, res) => {
             };
 
             res.status(200)
-                .cookie("accessToken", accessToken, options)
-                .cookie("refreshToken", refreshToken, options)
+                .setHeader("Set-Cookie", [
+                    serialize("accessToken", accessToken, options),
+                    serialize("refreshToken", refreshToken, options),
+                ])
                 .json({
                     isAdmin: user?.isAdmin,
                     user: loggedInUser,
