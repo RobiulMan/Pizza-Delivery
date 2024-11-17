@@ -35,6 +35,9 @@ const loginUserController = async (req, res) => {
             const options = {
                 httpOnly: true,
                 secure: true,
+                sameSite: "lax",
+                maxAge: 60 * 60 * 24 * 7, // 1 week
+                path: "/",
             };
 
             res.status(200)
