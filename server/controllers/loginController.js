@@ -33,25 +33,37 @@ const loginUserController = async (req, res) => {
                 "-password -refresToken",
             );
 
+            // const options = {
+            //     httpOnly: true,
+            //     secure: true,
+            //     sameSite: "lax",
+            //     maxAge: 60 * 60 * 24 * 7, // 1 week
+            //     path: "/",
+            // };
+
             const options = {
                 httpOnly: true,
-                secure: true,
-                sameSite: "lax",
-                maxAge: 60 * 60 * 24 * 7, // 1 week
+                secure: true, // Should be true in production for HTTPS
+                sameSite: "none", // For cross-origin requests in production
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
                 path: "/",
+                // Remove domain for Vercel deployment
             };
 
-            res.status(200)
-                .setHeader("Set-Cookie", [
-                    serialize("accessToken", accessToken, options),
-                    serialize("refreshToken", refreshToken, options),
-                ])
-                .json({
-                    isAdmin: user?.isAdmin,
-                    user: loggedInUser,
-                    accessToken,
-                    refreshToken,
-                });
+            // Use res.setHeader instead for Vercel deployments
+            res.setHeader("Set-Cookie", [
+                `accessToken=${accessToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60
+                }`,
+                `refreshToken=${refreshToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60
+                }`,
+            ]);
+
+            res.status(200).json({
+                isAdmin: user?.isAdmin,
+                user: loggedInUser,
+                accessToken,
+                refreshToken,
+            });
         } else {
             res.status(401).json({ message: "user does not exist" });
             return;
