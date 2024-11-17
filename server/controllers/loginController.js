@@ -22,7 +22,6 @@ const generateAccessAndRefereshToekns = async (userId) => {
 
 const loginUserController = async (req, res) => {
     const { email, password } = req.body;
-
     try {
         const user = await User.findOne({ email });
 
@@ -39,7 +38,7 @@ const loginUserController = async (req, res) => {
             };
 
             res.status(200)
-                .cookie("accessToekn", accessToken, options)
+                .cookie("accessToken", accessToken, options)
                 .cookie("refreshToken", refreshToken, options)
                 .json({
                     isAdmin: user?.isAdmin,
@@ -48,7 +47,8 @@ const loginUserController = async (req, res) => {
                     refreshToken,
                 });
         } else {
-            res.status(401).send("user does not exist");
+            res.status(401).json({ message: "user does not exist" });
+            return;
         }
     } catch (err) {
         throw new Error(err);
@@ -117,9 +117,9 @@ const logoutUserController = async (req, res) => {
         };
 
         res.status(200)
-            .clearCookie("accessToekn", options)
+            .clearCookie("accessToken", options)
             .clearCookie("refreshToken", options)
-            .json("user logged out");
+            .json({ message: "user logged out" });
     } catch (error) {
         throw new Error(error);
     }

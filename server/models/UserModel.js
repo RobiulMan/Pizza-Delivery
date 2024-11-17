@@ -1,12 +1,11 @@
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
     {
         name: {
             type: String,
             trim: true,
-            unique: true,
             required: true,
         },
         email: {
@@ -54,6 +53,6 @@ userSchema.methods.generateRefreshToken = function() {
     );
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

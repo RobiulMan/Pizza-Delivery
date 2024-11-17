@@ -32,25 +32,35 @@ const getAllPizzaController = async (req, res) => {
         /**
          * without redis
          */
-        // console.log(req.url);
 
         const page = parseInt(req.query.page) || 1; // Default to page 1
         const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
         const category = req.query.category || ""; // Category filter
+        const searchterm = req.query.searchTerm || ""; // Search term for product name
 
-        const query = category && category !== "all" ? { category } : {};
-        const data = await Pizza.find(query);
+        const query = {};
 
-        const startIndex = (page - 1) * limit;
-        const endIndex = page * limit;
+        if (category && category !== "all") {
+            query.category = category;
+        }
 
-        const results = data.slice(startIndex, endIndex);
+        if (searchterm) {
+            query.name = { $regex: searchterm, $options: "i" }; // Case-insensitive search
+        }
+
+        const totalItems = await Pizza.countDocuments(query);
+
+        const data = await Pizza.find(query)
+            .skip((page - 1) * limit) // Skip items for previous pages
+            .limit(limit); // Limit to items per page
+
+        // Return the results
         res.status(200).json({
-            page: parseInt(page),
-            limit: parseInt(limit),
-            totalItems: data.length,
-            totalPages: Math.ceil(data.length / limit),
-            data: results,
+            page,
+            limit,
+            totalItems,
+            totalPages: Math.ceil(totalItems / limit),
+            data,
         });
     } catch (error) {
         res.status(304).json(error);
@@ -157,3 +167,35 @@ module.exports = {
     updatePizzaController,
     deletePizzaController,
 };
+
+// const page = parseInt(req.query.page) || 1; // Default to page 1
+// const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
+// const category = req.query.category || ""; // Category filter
+// const searchTerm = req.query.query || ""; // Search term
+//
+// // Build the query object
+// const query = {};
+//
+// // If category filter is provided and not set to "all", add it to the query
+// if (category && category !== "all") {
+//     query.category = category;
+// }
+//
+// // If search term is provided, add a case-insensitive name filter
+// if (searchTerm) {
+//     query.name = { $regex: searchTerm, $options: "i" };
+// }
+//
+// // Find the products based on query and apply pagination with limit and skip
+// const totalItems = await Pizza.countDocuments(query); // Count total items that match the query
+// const data = await Pizza.find(query)
+//     .skip((page - 1) * limit) // Skip the previous pages' items
+//     .limit(limit); // Limit to items per page
+//
+// res.status(200).json({
+//     page,
+//     limit,
+//     totalItems,
+//     totalPages: Math.ceil(totalItems / limit),
+//     data,
+// });

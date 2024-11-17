@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const User = require('../models/UserModel');
+const mongoose = require("mongoose");
+const User = require("../models/UserModel");
 
 const getAllUserController = async (req, res) => {
     //
@@ -14,11 +14,10 @@ const getAllUserController = async (req, res) => {
 const deleteUser = async (req, res) => {
     const { userId } = req.body;
     const isMongooesId = mongoose.Types.ObjectId.isValid(userId);
-    console.log(isMongooesId);
     try {
         if (isMongooesId) {
             await User.findOneAndDelete({ _id: userId });
-            res.send('user deleted successfully');
+            res.send("user deleted successfully");
         }
     } catch (err) {
         console.log(err);
