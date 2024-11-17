@@ -81,7 +81,11 @@ const refreshAccessTokenController = async (req, res) => {
         const options = {
             httpOnly: true,
             secure: true,
+            sameSite: "lax",
+            maxAge: 60 * 60 * 24 * 7, // 1 week
+            path: "/",
         };
+
         const { refreshToken, accessToken } =
             await generateAccessAndRefereshToekns(user._id);
 
