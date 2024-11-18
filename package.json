@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "server.js",
     "engines": {
-        "node": "20.11.0",
+        "node": ">=20.11.0",
         "npm": "10.2.4"
     },
     "repository": "https://github.com/RobiulMan/Pizza-Delivery.git",
