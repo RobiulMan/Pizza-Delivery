@@ -33,14 +33,6 @@ const loginUserController = async (req, res) => {
                 "-password -refresToken",
             );
 
-            // const options = {
-            //     httpOnly: true,
-            //     secure: true,
-            //     sameSite: "lax",
-            //     maxAge: 60 * 60 * 24 * 7, // 1 week
-            //     path: "/",
-            // };
-
             const options = {
                 httpOnly: true,
                 secure: true, // Should be true in production for HTTPS
@@ -51,12 +43,15 @@ const loginUserController = async (req, res) => {
             };
 
             // Use res.setHeader instead for Vercel deployments
-            res.setHeader("Set-Cookie", [
-                `accessToken=${accessToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60
-                }`,
-                `refreshToken=${refreshToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60
-                }`,
-            ]);
+            // res.setHeader("Set-Cookie", [
+            //     `accessToken=${accessToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60
+            //     }`,
+            //     `refreshToken=${refreshToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60
+            //     }`,
+            // ]);
+            //
+            res.cookie("accessToken", accessToken, options);
+            res.cookie("refreshToken", refreshToken, options);
 
             res.status(200).json({
                 isAdmin: user?.isAdmin,
