@@ -12,7 +12,7 @@ dbConnection();
 const PORT = process.env.PORT || 8000;
 
 const corsOptions = {
-    origin: ["http://localhost:3000", "https://pizza-shop-nnbt.vercel.app"],
+    origin: [process.env.CLIENT_URL],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

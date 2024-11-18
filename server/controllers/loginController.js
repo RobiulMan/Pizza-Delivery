@@ -50,9 +50,14 @@ const loginUserController = async (req, res) => {
             //     }`,
             // ]);
             //
-            res.cookie("accessToken", accessToken, options);
-            res.cookie("refreshToken", refreshToken, options);
-
+            // res.cookie("accessToken", accessToken, options);
+            // res.cookie("refreshToken", refreshToken, options);
+            // res.setHeader("Access-Control-Allow-Credentials", "true");
+            // res.setHeader(
+            //     "Access-Control-Allow-Origin",
+            //     process.env.CLIENT_URL,
+            // ); // Your Vercel app URL
+            //
             res.status(200).json({
                 isAdmin: user?.isAdmin,
                 user: loggedInUser,
